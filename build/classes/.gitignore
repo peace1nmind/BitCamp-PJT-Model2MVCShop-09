@@ -2,3 +2,7 @@
 /config/
 /log4j.properties
 /sql/
+/Purchase.class
+/Product.class
+/User.class
+/TranCodeMapper.class
