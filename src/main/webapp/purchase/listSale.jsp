@@ -14,9 +14,17 @@
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 
 <script type="text/javascript">
-	function fncGetUserList() {
-		document.detailForm.submit();
+	
+	function fncGetSaleList(page) {
+		
+		if (page != null && page != 0) {
+			$("input[name='salePage']").val(page);
+		}
+		
+		$("form").submit();
+		
 	}
+	
 </script>
 
 <style>
@@ -123,83 +131,56 @@ a.disabled {
 		</table>
 		
 		<input type="hidden" name="salePage" value="${salePaging.currentPage}">
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
 
-		<!-- 			<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;"> -->
+			<tr>
+				<td align="center">
+				
+					<a href="javascript:fncGetSaleList(1)"
+						${(salePaging.left)? "":"class='disabled'" }>
+						<span>◀</span>
+					</a>
 
-		<!-- 				<tr> -->
-		<!-- 					<td align="center"> -->
+					&nbsp;
+					
+					<a href="javascript:fncGetSaleList('${salePaging.start - 1 }')"
+						${(salePaging.left)? "":"class='disabled'" }>
+						<span>이전</span>
+					</a>
 
-		<%-- 						<a href="/product/listProduct?page=${paging.currentPage } --%>
-		<%-- 														&menu=${menu} --%>
-		<%-- 														&searchCondition=${search.searchCondition} --%>
-		<%-- 														&searchKeyword=${search.searchKeyword} --%>
-		<%-- 														&orderBy=${search.orderBy}&desc=${search.desc} --%>
-		<%-- 														&salePage=1"  --%>
-		<%-- 						${(salePaging.left)? "":"class='disabled'" }> --%>
-		<!-- 							<span>◀</span> -->
-		<!-- 						</a> -->
+					&nbsp;&nbsp;
 
-		<!-- 						&nbsp; -->
+					<c:forEach begin="${salePaging.start }" end="${salePaging.end }" varStatus="status">
+						
+						<a href="javascript:fncGetSaleList('${status.count }')" 
+							${(salePaging.currentPage==status.count)? "style='font-weight: bold; font-size: 15px'" : "" }>
+							${status.count }
+						</a>
 
-		<%-- 						<a href="/product/listProduct?page=${paging.currentPage } --%>
-		<%-- 														&menu=${menu} --%>
-		<%-- 														&searchCondition=${search.searchCondition} --%>
-		<%-- 														&searchKeyword=${search.searchKeyword} --%>
-		<%-- 														&orderBy=${search.orderBy}&desc=${search.desc} --%>
-		<%-- 														&salePage=${salePaging.start - 1 }"  --%>
-		<%-- 						${(salePaging.left)? "":"class='disabled'" }> --%>
-		<!-- 							<span>이전</span> -->
-		<!-- 						</a> -->
+					</c:forEach>
 
-		<!-- 						&nbsp;&nbsp; -->
+					&nbsp;&nbsp;
+					
+					<a href="javascript:fncGetSaleList('${salePaging.end + 1 }')" 
+						${(salePaging.right)? "":"class='disabled'" }>>
+						<span>다음</span>
+					</a>
 
-		<%-- 						<c:forEach begin="${salePaging.start }" end="${salePaging.end }" varStatus="status"> --%>
+					&nbsp;
+					
+					<a href="javascript:fncGetSaleList('${salePaging.totalPage }')"
+						${(salePaging.right)? "":"class='disabled'" }>
+						<span>▶</span>
+					</a>
+					
+				</td>
+			</tr>
 
-		<%-- 							<a href="/product/listProduct?page=${paging.currentPage } --%>
-		<%-- 															&menu=${menu} --%>
-		<%-- 															&searchCondition=${search.searchCondition} --%>
-		<%-- 															&searchKeyword=${search.searchKeyword} --%>
-		<%-- 															&orderBy=${search.orderBy}&desc=${search.desc} --%>
-		<%-- 															&salePage=${status.count }"  --%>
-		<%-- 							${(salePaging.currentPage==status.count)? "style='font-weight: bold; font-size: 15px'" : "" }> --%>
-		<%-- 								${status.count } --%>
-		<!-- 							</a>  -->
+		</table>
 
-		<%-- 						</c:forEach> --%>
-
-		<!-- 						&nbsp;&nbsp; -->
-
-		<%-- 						<a href="/product/listProduct?page=${paging.currentPage } --%>
-		<%-- 														&menu=${menu} --%>
-		<%-- 														&searchCondition=${search.searchCondition} --%>
-		<%-- 														&searchKeyword=${search.searchKeyword} --%>
-		<%-- 														&orderBy=${search.orderBy}&desc=${search.desc} --%>
-		<%-- 														&salePage=${salePaging.end + 1 }"  --%>
-		<%-- 						${(salePaging.right)? "":"class='disabled'" }> --%>
-		<!-- 							<span>다음</span> -->
-		<!-- 						</a> -->
-
-		<!-- 						&nbsp; -->
-
-		<%-- 						<a href="/product/listProduct?page=${paging.currentPage } --%>
-		<%-- 														&menu=${menu} --%>
-		<%-- 														&searchCondition=${search.searchCondition} --%>
-		<%-- 														&searchKeyword=${search.searchKeyword} --%>
-		<%-- 														&orderBy=${search.orderBy}&desc=${search.desc} --%>
-		<%-- 														&salePage=${salePaging.totalPage }"  --%>
-		<%-- 						${(salePaging.right)? "":"class='disabled'" }> --%>
-		<!-- 							<span>▶</span> -->
-		<!-- 						</a> -->
-
-		<!-- 					</td> -->
-		<!-- 				</tr> -->
-
-		<!-- 			</table> -->
-
-		<jsp:include page="../common/pagingNavigator.jsp">
-			<jsp:param value="true" name="isSale" />
-		</jsp:include>
-
+		<p>paging=${paging }</p>
+		<p>salePaging=${salePaging }</p>
 		<!--  페이지 Navigator 끝 -->
 		<!-- 			</form> -->
 

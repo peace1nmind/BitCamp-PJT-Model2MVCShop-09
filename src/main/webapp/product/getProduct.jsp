@@ -9,6 +9,23 @@
 	
 		<title>상품상세조회</title>
 		<link rel="stylesheet" href="/css/admin.css" type="text/css">
+		
+		<script src="https://code.jquery.com/jquery-2.2.4.js" 
+				integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" 
+				crossorigin="anonymous"></script>
+		
+		<script type="text/javascript">
+		
+			$(function() {
+				var price = parseInt($("#productPrice").text());
+				
+				alert("실행");
+				console.log(price.toLocaleString());
+				
+				$("#productPrice").text(price.toLocaleString());
+			});
+		
+		</script>
 	
 	</head>
 	
@@ -100,7 +117,7 @@
 				<tr>
 					<td width="104" class="ct_write">가격</td>
 					<td bgcolor="D6D6D6" width="1"></td>
-					<td class="ct_write01">${product.price }</td>
+					<td class="ct_write01" id="productPrice">${product.price }</td>
 				</tr>
 				<tr>
 					<td height="1" colspan="3" bgcolor="D6D6D6"></td>

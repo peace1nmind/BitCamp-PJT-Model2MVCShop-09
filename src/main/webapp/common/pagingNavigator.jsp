@@ -8,16 +8,17 @@
 				crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-
-	function fncGetList(currentPage) {
+// <!--
+	function fncGetList(page) {
+		console.log("page= "+page);
 		
-		alert('${param.isSale}');
-		
-		$("input[name='page']").val(currentPage);
+		if (page != null && page != 0) {
+			$("input[name='page']").val(page);
+		}
 		
 		$("form").submit();
 	}
-	
+// -->
 </script>
 
 <input type="hidden" name="isSale" value="${param.isSale }">

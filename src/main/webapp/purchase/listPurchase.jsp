@@ -32,23 +32,30 @@
 	        
     	</style>
     	
+    	<script src="https://code.jquery.com/jquery-2.2.4.js" 
+				integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" 
+				crossorigin="anonymous"></script>
+    	
     	<script type="text/javascript">
-    		
+//     	<!--	
     		function fncUpdateTranCode(tranNo, tranCode) {
     			if(confirm("배송정보를 변경하시겠습니까?\n\n배송중 → 배송완료")) {
-    				window.location.href="/purchase/updateTranCode?tranNo="+tranNo+"&tranCode="+tranCode;
+//     				window.location.href="/purchase/updateTranCode?tranNo="+tranNo+"&tranCode="+tranCode;
+    				$("location").attr("href", "/purchase/updateTranCode?tranNo="+tranNo+"&tranCode="+tranCode);
     			}
     		}
-    	
+    		
+    		$("form").attr("action", "/product/listProduct").attr("method", "podst");
+//     	-->
     	</script>
 		
 	</head>
 	
 	<body bgcolor="#ffffff" text="#000000">
-	
-		<div style="width: 98%; margin-left: 10px;">
 		
-			<form name="detailForm" action="/purchase/listPurchase" method="post">
+		<form name="detailForm" action="/purchase/listPurchase" method="post">
+			
+			<div style="width: 98%; margin-left: 10px;">
 			
 				<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 					<tr>
@@ -175,53 +182,55 @@
 					
 				</table>
 				
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
+<!-- 				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;"> -->
 					
-					<tr>
-						<td align="center">
+<!-- 					<tr> -->
+<!-- 						<td align="center"> -->
 					
-							<a href="/purchase/listPurchase?page=1"
-							${(paging.left)? "":"class='disabled'" }>
-								<span>◀</span>
-							</a>
+<!-- 							<a href="/purchase/listPurchase?page=1" -->
+<%-- 							${(paging.left)? "":"class='disabled'" }> --%>
+<!-- 								<span>◀</span> -->
+<!-- 							</a> -->
 							
-							&nbsp;
+<!-- 							&nbsp; -->
 							
-							<a href="/purchase/listPurchase?page=${paging.start - 1 }"
-							${(paging.left)? "":"class='disabled'" }>
-								<span>이전</span>
-							</a>
+<%-- 							<a href="/purchase/listPurchase?page=${paging.start - 1 }" --%>
+<%-- 							${(paging.left)? "":"class='disabled'" }> --%>
+<!-- 								<span>이전</span> -->
+<!-- 							</a> -->
 					
-							&nbsp;&nbsp;
+<!-- 							&nbsp;&nbsp; -->
 						
-							<c:forEach begin="${paging.start }" end="${paging.end }" varStatus="status">
-								<a href="/purchase/listPurchase?page=${status.count }" 
-								${(paging.currentPage==status.count)? "style='font-weight: bold; font-size: 15px'" : "" }>
-									${status.count }
-								</a> 
-							</c:forEach>
+<%-- 							<c:forEach begin="${paging.start }" end="${paging.end }" varStatus="status"> --%>
+<%-- 								<a href="/purchase/listPurchase?page=${status.count }"  --%>
+<%-- 								${(paging.currentPage==status.count)? "style='font-weight: bold; font-size: 15px'" : "" }> --%>
+<%-- 									${status.count } --%>
+<!-- 								</a>  -->
+<%-- 							</c:forEach> --%>
 
-							&nbsp;&nbsp;
+<!-- 							&nbsp;&nbsp; -->
 							
-							<a href="/purchase/listPurchase?page=${paging.end + 1 }"
-							${(paging.right)? "":"class='disabled'" }>
-								<span>다음</span>
-							</a>
+<%-- 							<a href="/purchase/listPurchase?page=${paging.end + 1 }" --%>
+<%-- 							${(paging.right)? "":"class='disabled'" }> --%>
+<!-- 								<span>다음</span> -->
+<!-- 							</a> -->
 							
-							&nbsp;
+<!-- 							&nbsp; -->
 							
-							<a href="/purchase/listPurchase?page=${paging.totalPage }"
-							${(paging.right)? "":"class='disabled'" }>
-								<span>▶</span>
-							</a>
+<%-- 							<a href="/purchase/listPurchase?page=${paging.totalPage }" --%>
+<%-- 							${(paging.right)? "":"class='disabled'" }> --%>
+<!-- 								<span>▶</span> -->
+<!-- 							</a> -->
 					
-						</td>
-					</tr>
+<!-- 						</td> -->
+<!-- 					</tr> -->
 					
-				</table>
+<!-- 				</table> -->
 			
 			<!--  페이지 Navigator 끝 -->
-			</form>
+			
+			<input type="hidden" name="page" value="${paging.currentPage}">
+			<jsp:include page="../common/pagingNavigator.jsp"></jsp:include>
 		
 		</div>
 		
@@ -230,6 +239,8 @@
 		<%	System.out.println("\tinclude 발생: listPurchaseHistory.jsp"); %>
 		<%--<jsp:include page="listPurchaseHistory.jsp"></jsp:include>--%>
 		<%@ include file="listPurchaseHistory.jsp" %>
+		
+		</form>
 		
 	</body>
 </html>

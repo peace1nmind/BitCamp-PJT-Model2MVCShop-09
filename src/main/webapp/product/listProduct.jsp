@@ -13,6 +13,10 @@
 		
 		<link rel="stylesheet" href="/css/admin.css" type="text/css">
 		
+		<script src="https://code.jquery.com/jquery-2.2.4.js" 
+				integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" 
+				crossorigin="anonymous"></script>
+		
 		<script type="text/javascript">
 		<!--
 		function fncGetProductList(){
@@ -26,26 +30,16 @@
 				document.detailForm.submit();
 			}
 		}
+		
+		$("form").attr("action", "/product/listProduct").attr("method", "podst");
 		-->
 		
 		</script>
 		
-		
-		
-		<style>
-	        a.disabled {
-	            pointer-events: none; /* 링크 클릭 비활성화 */
-	            color: #FFFFFF; /* 비활성화 된 링크의 색상 변경 */
-	            text-decoration: none; /* 링크 밑줄 제거 */
-	            cursor: default; /* 기본 커서로 변경 */
-	       }
-	        
-    	</style>
-		
 	</head>
 
 	<body bgcolor="#ffffff" text="#000000">
-		<form name="detailForm" action="/product/listProduct" method="post">
+		<form name="detailForm">
 			
 			<div style="width:98%; margin-left:10px;">
 
@@ -87,7 +81,7 @@
 								</option>
 								
 								<!-- Mapper 추가필요 -->
-								<option value="2" ${(!empty search.searchCondition && search.searchCondition=='1')? "selected":""}>
+								<option value="2" ${(!empty search.searchCondition && search.searchCondition=='2')? "selected":""}>
 									상품설명
 								</option>
 								
@@ -198,108 +192,18 @@
 					
 				</table>
 				
-				<input type="hidden" name="page" value="${paging.currentPage}">
-				
-<!-- 				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;"> -->
-<!-- 					<tr> -->
-<!-- 						<td align="center"> -->
-					
-<%-- 							<a href="/product/listProduct?page=1 --%>
-<%-- 															&menu=${menu} --%>
-<%-- 															&searchCondition=${search.searchCondition} --%>
-<%-- 															&searchKeyword=${search.searchKeyword} --%>
-<%-- 															&orderBy=${search.orderBy} --%>
-<%-- 															&desc=${search.desc} --%>
-<%-- 															&salePage=${salePaging.currentPage} --%>
-<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
-<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
-<%-- 							${(paging.left)? "":"style='visibility:hidden'"}> --%>
-<!-- 								<span>◀</span> -->
-<!-- 							</a> -->
-							
-<!-- 							&nbsp; -->
-							
-<%-- 							<a href="/product/listProduct?page=${paging.start - 1} --%>
-<%-- 															&menu=${menu} --%>
-<%-- 															&searchCondition=${search.searchCondition} --%>
-<%-- 															&searchKeyword=${search.searchKeyword} --%>
-<%-- 															&orderBy=${search.orderBy} --%>
-<%-- 															&desc=${search.desc} --%>
-<%-- 															&salePage=${salePaging.currentPage} --%>
-<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
-<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
-<%-- 							${(paging.left)? "":"style='visibility:hidden'"}> --%>
-<!-- 								<span>이전</span> -->
-<!-- 							</a> -->
-							
-<!-- 							&nbsp;&nbsp; -->
-							
-<%-- 					<c:forEach begin="${paging.start}" end="${paging.end}" var="i" > --%>
-<%-- 							<a href="/product/listProduct?page=${i} --%>
-<%-- 															&menu=${menu} --%>
-<%-- 															&searchCondition=${search.searchCondition} --%>
-<%-- 															&searchKeyword=${search.searchKeyword} --%>
-<%-- 															&orderBy=${search.orderBy} --%>
-<%-- 															&desc=${search.desc} --%>
-<%-- 															&salePage=${salePaging.currentPage} --%>
-<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
-<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
-<%-- 							${(paging.currentPage==i)? "style='font-weight: bold; font-size: 15px'" : ""}> --%>
-<%-- 								${i} --%>
-<!-- 							</a> -->
-<%-- 					</c:forEach> --%>
-					
-<!-- 							&nbsp;&nbsp; -->
-						
-							
-<%-- 							<a href="/product/listProduct?page=${paging.end + 1} --%>
-<%-- 															&menu=${menu} --%>
-<%-- 															&searchCondition=${search.searchCondition} --%>
-<%-- 															&searchKeyword=${search.searchKeyword} --%>
-<%-- 															&orderBy=${search.orderBy} --%>
-<%-- 															&desc=${search.desc} --%>
-<%-- 															&salePage=${salePaging.currentPage} --%>
-<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
-<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
-<%-- 							${(paging.right)? "":"style='visibility:hidden'"}> --%>
-<!-- 								<span>다음</span> -->
-<!-- 							</a> -->
-							
-<!-- 							&nbsp; -->
-							
-<%-- 							<a href="/product/listProduct?page=${paging.totalPage} --%>
-<%-- 															&menu=${menu} --%>
-<%-- 															&searchCondition=${search.searchCondition} --%>
-<%-- 															&searchKeyword=${search.searchKeyword} --%>
-<%-- 															&orderBy=${search.orderBy} --%>
-<%-- 															&desc=${search.desc} --%>
-<%-- 															&salePage=${salePaging.currentPage} --%>
-<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
-<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
-<%-- 							${(paging.right)? "":"style='visibility:hidden'"}> --%>
-<!-- 								<span>▶</span> -->
-<!-- 							</a> -->
-							
-
-<!-- 				    	</td> -->
-<!-- 					</tr> -->
-<!-- 				</table> -->
-				<!--  페이지 Navigator 끝 -->
-			
-			<jsp:include page="../common/pagingNavigator.jsp">
-				<jsp:param value="false" name="isSale"/>
-			</jsp:include>
+			<input type="hidden" name="page" value="${paging.currentPage}">
+<%-- 			<jsp:include page="../common/pagingNavigator.jsp"></jsp:include> --%>
+			<%@ include file="../common/pagingNavigator.jsp" %>
 			
 			</div>
 
-		
-		
 		<br><br>
 		
 		<c:if test="${menu=='manage'}">
 			<%	System.out.println("\tinclude 발생: listSale.jsp"); %>
-<%-- 			<jsp:include page="/purchase/listSale.jsp"></jsp:include> --%>
-			<%@ include file="../purchase/listSale.jsp" %>
+			<jsp:include page="/purchase/listSale.jsp"></jsp:include>
+<%-- 			<%@ include file="../purchase/listSale.jsp" %> --%>
 		</c:if>
 		
 		</form>
