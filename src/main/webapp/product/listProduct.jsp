@@ -30,6 +30,8 @@
 		
 		</script>
 		
+		
+		
 		<style>
 	        a.disabled {
 	            pointer-events: none; /* 링크 클릭 비활성화 */
@@ -43,10 +45,11 @@
 	</head>
 
 	<body bgcolor="#ffffff" text="#000000">
-	
-		<div style="width:98%; margin-left:10px;">
-		
-			<form name="detailForm" action="/product/listProduct?menu=${menu}" method="post">
+		<form name="detailForm" action="/product/listProduct" method="post">
+			
+			<div style="width:98%; margin-left:10px;">
+
+				<input type="hidden" name="menu" value="${menu }">
 			
 				<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 					<tr>
@@ -82,9 +85,11 @@
 								<option value="1" ${(!empty search.searchCondition && search.searchCondition=='1')? "selected":""}>
 									상품명
 								</option>
-								<%-- <option value="2" ${(!empty search.searchCondition && search.searchCondition=='2')? "selected":""}>
-									상품가격
-								</option> --%>
+								
+								<!-- Mapper 추가필요 -->
+								<option value="2" ${(!empty search.searchCondition && search.searchCondition=='1')? "selected":""}>
+									상품설명
+								</option>
 								
 							</select>
 							
@@ -140,7 +145,6 @@
 					</tr>
 				</table>
 				
-				
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
 					<tr>
 						<td colspan="11" >전체 ${paging.total} 건수, 현재 ${paging.currentPage} 페이지</td>
@@ -194,102 +198,111 @@
 					
 				</table>
 				
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-					<tr>
-						<td align="center">
+				<input type="hidden" name="page" value="${paging.currentPage}">
+				
+<!-- 				<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;"> -->
+<!-- 					<tr> -->
+<!-- 						<td align="center"> -->
 					
-							<a href="/product/listProduct?page=1
-															&menu=${menu}
-															&searchCondition=${search.searchCondition}
-															&searchKeyword=${search.searchKeyword}
-															&orderBy=${search.orderBy}
-															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}
-															&searchPriceBigger=${search.searchPriceBigger}
-															&searchPriceLess=${search.searchPriceLess}" 
-							${(paging.left)? "":"class='disabled'"}>
-								<span>◀</span>
-							</a>
+<%-- 							<a href="/product/listProduct?page=1 --%>
+<%-- 															&menu=${menu} --%>
+<%-- 															&searchCondition=${search.searchCondition} --%>
+<%-- 															&searchKeyword=${search.searchKeyword} --%>
+<%-- 															&orderBy=${search.orderBy} --%>
+<%-- 															&desc=${search.desc} --%>
+<%-- 															&salePage=${salePaging.currentPage} --%>
+<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
+<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
+<%-- 							${(paging.left)? "":"style='visibility:hidden'"}> --%>
+<!-- 								<span>◀</span> -->
+<!-- 							</a> -->
 							
-							&nbsp;
+<!-- 							&nbsp; -->
 							
-							<a href="/product/listProduct?page=${paging.start - 1}
-															&menu=${menu}
-															&searchCondition=${search.searchCondition}
-															&searchKeyword=${search.searchKeyword}
-															&orderBy=${search.orderBy}
-															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}
-															&searchPriceBigger=${search.searchPriceBigger}
-															&searchPriceLess=${search.searchPriceLess}" 
-							${(paging.left)? "":"class='disabled'"}>
-								<span>이전</span>
-							</a>
+<%-- 							<a href="/product/listProduct?page=${paging.start - 1} --%>
+<%-- 															&menu=${menu} --%>
+<%-- 															&searchCondition=${search.searchCondition} --%>
+<%-- 															&searchKeyword=${search.searchKeyword} --%>
+<%-- 															&orderBy=${search.orderBy} --%>
+<%-- 															&desc=${search.desc} --%>
+<%-- 															&salePage=${salePaging.currentPage} --%>
+<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
+<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
+<%-- 							${(paging.left)? "":"style='visibility:hidden'"}> --%>
+<!-- 								<span>이전</span> -->
+<!-- 							</a> -->
 							
-							&nbsp;&nbsp;
+<!-- 							&nbsp;&nbsp; -->
 							
-					<c:forEach begin="${paging.start}" end="${paging.end}" var="i" >
-							<a href="/product/listProduct?page=${i}
-															&menu=${menu}
-															&searchCondition=${search.searchCondition}
-															&searchKeyword=${search.searchKeyword}
-															&orderBy=${search.orderBy}
-															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}
-															&searchPriceBigger=${search.searchPriceBigger}
-															&searchPriceLess=${search.searchPriceLess}" 
-							${(paging.currentPage==i)? "style='font-weight: bold; font-size: 15px'" : ""}>
-								${i}
-							</a>
-					</c:forEach>
+<%-- 					<c:forEach begin="${paging.start}" end="${paging.end}" var="i" > --%>
+<%-- 							<a href="/product/listProduct?page=${i} --%>
+<%-- 															&menu=${menu} --%>
+<%-- 															&searchCondition=${search.searchCondition} --%>
+<%-- 															&searchKeyword=${search.searchKeyword} --%>
+<%-- 															&orderBy=${search.orderBy} --%>
+<%-- 															&desc=${search.desc} --%>
+<%-- 															&salePage=${salePaging.currentPage} --%>
+<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
+<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
+<%-- 							${(paging.currentPage==i)? "style='font-weight: bold; font-size: 15px'" : ""}> --%>
+<%-- 								${i} --%>
+<!-- 							</a> -->
+<%-- 					</c:forEach> --%>
 					
-							&nbsp;&nbsp;
+<!-- 							&nbsp;&nbsp; -->
 						
 							
-							<a href="/product/listProduct?page=${paging.end + 1}
-															&menu=${menu}
-															&searchCondition=${search.searchCondition}
-															&searchKeyword=${search.searchKeyword}
-															&orderBy=${search.orderBy}
-															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}
-															&searchPriceBigger=${search.searchPriceBigger}
-															&searchPriceLess=${search.searchPriceLess}" 
-							${(paging.right)? "":"class='disabled'"}>
-								<span>다음</span>
-							</a>
+<%-- 							<a href="/product/listProduct?page=${paging.end + 1} --%>
+<%-- 															&menu=${menu} --%>
+<%-- 															&searchCondition=${search.searchCondition} --%>
+<%-- 															&searchKeyword=${search.searchKeyword} --%>
+<%-- 															&orderBy=${search.orderBy} --%>
+<%-- 															&desc=${search.desc} --%>
+<%-- 															&salePage=${salePaging.currentPage} --%>
+<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
+<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
+<%-- 							${(paging.right)? "":"style='visibility:hidden'"}> --%>
+<!-- 								<span>다음</span> -->
+<!-- 							</a> -->
 							
-							&nbsp;
+<!-- 							&nbsp; -->
 							
-							<a href="/product/listProduct?page=${paging.totalPage}
-															&menu=${menu}
-															&searchCondition=${search.searchCondition}
-															&searchKeyword=${search.searchKeyword}
-															&orderBy=${search.orderBy}
-															&desc=${search.desc}
-															&salePage=${salePaging.currentPage}
-															&searchPriceBigger=${search.searchPriceBigger}
-															&searchPriceLess=${search.searchPriceLess}" 
-							${(paging.right)? "":"class='disabled'"}>
-								<span>▶</span>
-							</a>
+<%-- 							<a href="/product/listProduct?page=${paging.totalPage} --%>
+<%-- 															&menu=${menu} --%>
+<%-- 															&searchCondition=${search.searchCondition} --%>
+<%-- 															&searchKeyword=${search.searchKeyword} --%>
+<%-- 															&orderBy=${search.orderBy} --%>
+<%-- 															&desc=${search.desc} --%>
+<%-- 															&salePage=${salePaging.currentPage} --%>
+<%-- 															&searchPriceBigger=${search.searchPriceBigger} --%>
+<%-- 															&searchPriceLess=${search.searchPriceLess}"  --%>
+<%-- 							${(paging.right)? "":"style='visibility:hidden'"}> --%>
+<!-- 								<span>▶</span> -->
+<!-- 							</a> -->
 							
 
-				    	</td>
-					</tr>
-				</table>
+<!-- 				    	</td> -->
+<!-- 					</tr> -->
+<!-- 				</table> -->
 				<!--  페이지 Navigator 끝 -->
 			
-			</form>
+			<jsp:include page="../common/pagingNavigator.jsp">
+				<jsp:param value="false" name="isSale"/>
+			</jsp:include>
+			
+			</div>
+
 		
-		</div>
 		
 		<br><br>
 		
 		<c:if test="${menu=='manage'}">
 			<%	System.out.println("\tinclude 발생: listSale.jsp"); %>
-			<%--<jsp:include page="/purchase/listSale.jsp"></jsp:include>--%>
+<%-- 			<jsp:include page="/purchase/listSale.jsp"></jsp:include> --%>
 			<%@ include file="../purchase/listSale.jsp" %>
 		</c:if>
+		
+		</form>
+		
 	</body>
 </html>

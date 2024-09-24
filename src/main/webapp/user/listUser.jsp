@@ -49,6 +49,7 @@
 			
 			//==> UI 수정 추가부분  :  userId LINK Event End User 에게 보일수 있도록 
 			$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+			$("td.ct_btn01:contains('검색'), .ct_list_pop td:nth-child(3)").css("cursor", "pointer")
 			$("h7").css("color" , "red");
 			
 			
@@ -178,7 +179,7 @@
 		<td align="center">
 		   <input type="hidden" id="currentPage" name="currentPage" value=""/>
 	
-			<jsp:include page="../common/pageNavigator.jsp"/>	
+			<jsp:include page="../common/pageNavigator.jsp"/>
 			
     	</td>
 	</tr>

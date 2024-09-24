@@ -62,7 +62,7 @@ public class ProductController {
 
 	// Method
 	// 상품목록
-	@RequestMapping("/listProduct")
+	@RequestMapping({"/listProduct", "/listSale"})
 	public String listProduct(@RequestParam("menu") String menu,
 							  @ModelAttribute("search") Search search,
 							  @RequestParam(name = "salePage", required = false, defaultValue = "1") int salePage,
