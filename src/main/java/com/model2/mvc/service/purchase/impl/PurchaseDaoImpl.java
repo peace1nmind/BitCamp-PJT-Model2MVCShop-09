@@ -38,8 +38,8 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	@Override
 	public Purchase selectPurchase(int tranNo) {
 		Purchase purchase = sqlSession.selectOne("PurchaseMapper.selectPurchase", tranNo);
-		purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
-		purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
+//		purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
+//		purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
 		
 		return purchase;
 	}
@@ -48,8 +48,8 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	public Purchase selectPurchaseByProd(int prodNo) {
 		
 		Purchase purchase = sqlSession.selectOne("PurchaseMapper.selectPurchaseByProd", new Integer(prodNo));
-		purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
-		purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
+//		purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
+//		purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
 		
 		return purchase;
 	}
@@ -67,12 +67,12 @@ public class PurchaseDaoImpl implements PurchaseDao {
 													buyerId, 
 													getRowBounds(search));
 		
-		for (Purchase purchase : list) {
-			purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
-			purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
-			
-			list.set(list.indexOf(purchase), purchase);
-		}
+//		for (Purchase purchase : list) {
+//			purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
+//			purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
+//			
+//			list.set(list.indexOf(purchase), purchase);
+//		}
 		
 		return list;
 	}
@@ -90,12 +90,12 @@ public class PurchaseDaoImpl implements PurchaseDao {
 													buyerId,
 													getRowBounds(search));
 		
-		for (Purchase purchase : list) {
-			purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
-			purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
-			
-			list.set(list.indexOf(purchase), purchase);
-		}
+//		for (Purchase purchase : list) {
+//			purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
+//			purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
+//			
+//			list.set(list.indexOf(purchase), purchase);
+//		}
 		
 		return list;
 	}
@@ -113,12 +113,12 @@ public class PurchaseDaoImpl implements PurchaseDao {
 													null, 
 													getRowBounds(search));
 		
-		for (Purchase purchase : list) {
-			purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
-			purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
-			
-			list.set(list.indexOf(purchase), purchase);
-		}
+//		for (Purchase purchase : list) {
+//			purchase.setPurchaseProd(sqlSession.selectOne("ProductMapper.selectProduct", purchase.getPurchaseProd().getProdNo()));
+//			purchase.setBuyer(sqlSession.selectOne("UserMapper.getUser", purchase.getBuyer().getUserId()));
+//			
+//			list.set(list.indexOf(purchase), purchase);
+//		}
 		
 		return list;
 	}

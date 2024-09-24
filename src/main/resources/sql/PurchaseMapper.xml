@@ -8,10 +8,10 @@
 	
 	<!-- DB Column과 VO의 Field 맵핑 -->
 	<!-- TypeHandler가 필요하다 -->
+	<!-- 		<result property="purchaseProd.prodNo" 	column="prod_no" 			jdbcType="INTEGER"/> -->
+	<!-- 		<result property="buyer.userId" 		column="buyer_id" 			jdbcType="VARCHAR"/> -->
 	<resultMap type="purchase" id="purchaseSelectMap">
-		<result property="tranNo" 				column="tran_no" 			jdbcType="INTEGER"/>
-		<result property="purchaseProd.prodNo" 	column="prod_no" 			jdbcType="INTEGER"/>
-		<result property="buyer.userId" 		column="buyer_id" 			jdbcType="VARCHAR"/>	
+		<id 	property="tranNo" 				column="tran_no" 			jdbcType="INTEGER"/>
 		<result property="paymentOption" 		column="payment_option" 	jdbcType="CHAR"/>
 		<result property="receiverName" 		column="receiver_name" 		jdbcType="VARCHAR"/>
 		<result property="receiverPhone" 		column="receiver_phone" 	jdbcType="VARCHAR"/>
@@ -20,6 +20,8 @@
 		<result property="tranCode" 			column="tran_status_code" 	jdbcType="CHAR"/>
 		<result property="orderDate" 			column="order_date" 		jdbcType="DATE"/>
 		<result property="dlvyDate" 			column="dlvy_date" 			jdbcType="DATE"/>
+		<association property="purchaseProd" 	column="prod_no"			select="ProductMapper.selectProduct"></association>
+		<association property="buyer"			column="buyer_id"			select="UserMapper.getUser"></association>
 	</resultMap>
 	
 	

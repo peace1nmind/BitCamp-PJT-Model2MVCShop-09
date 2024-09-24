@@ -8,7 +8,7 @@
 	
 	<!-- DB Column과 VO의 Field 맵핑 -->
 	<resultMap type="product" id="productSelectMap">
-		<result property="prodNo" 		column="prod_no" 			jdbcType="INTEGER"/>
+		<id 	property="prodNo" 		column="prod_no" 			jdbcType="INTEGER"/>
 		<result property="prodName" 	column="prod_name" 			jdbcType="VARCHAR"/>
 		<result property="prodDetail" 	column="prod_detail" 		jdbcType="VARCHAR"/>
 		<result property="manuDate" 	column="manufacture_day" 	jdbcType="VARCHAR"/>
