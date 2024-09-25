@@ -15,58 +15,67 @@
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript">
 	   
-		/*=============jQuery 변경 주석처리 =============
+// 		/*=============jQuery 변경 주석처리 =============
+// 		function fncLogin() {
+// 			var id=document.loginForm.userId.value;
+// 			var pw=document.loginForm.password.value;
+			
+// 			if(id == null || id.length <1) {
+// 				alert('ID 를 입력하지 않으셨습니다.');
+// 				document.loginForm.userId.focus();
+// 				return;
+// 			}
+			
+// 			if(pw == null || pw.length <1) {
+// 				alert('패스워드를 입력하지 않으셨습니다.');
+// 				document.loginForm.password.focus();
+// 				return;
+// 			}
+// 		}
+		
+// 		//Call Back Method 이용 onload 시 Event 처리
+// 		window.onload = function(){
+// 			document.getElementById("userId").focus();
+// 		}
+// 		========================================	*/
+		
 		function fncLogin() {
-			var id=document.loginForm.userId.value;
-			var pw=document.loginForm.password.value;
+
+			var id=$("input:text").val();
+			var pw=$("input:password").val();
 			
 			if(id == null || id.length <1) {
 				alert('ID 를 입력하지 않으셨습니다.');
-				document.loginForm.userId.focus();
+				$("input:text").focus();
 				return;
 			}
 			
 			if(pw == null || pw.length <1) {
 				alert('패스워드를 입력하지 않으셨습니다.');
-				document.loginForm.password.focus();
+				$("input:password").focus();
 				return;
 			}
+			
+			//$("form").attr("method" , "POST");
+			//$("form").attr("action" , "/login.do");
+			//$("form").attr("target" , "_parent");
+		    //$("form").submit();
+			//==> 위의 4실행문과 같은의미			    
+			$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 		}
 		
-		//Call Back Method 이용 onload 시 Event 처리
-		window.onload = function(){
-			document.getElementById("userId").focus();
-		}========================================	*/
 		$( function() {
 			
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("#userId").focus();
 			
 			//==> 추가된부분 : "Login"  Event 연결
-			$("img[src='/images/btn_login.gif']").on("click" , function() {
-
-				var id=$("input:text").val();
-				var pw=$("input:password").val();
-				
-				if(id == null || id.length <1) {
-					alert('ID 를 입력하지 않으셨습니다.');
-					$("input:text").focus();
-					return;
+			$("img[src='/images/btn_login.gif']").on("click" , fncLogin);
+			
+			$(document).on("keydown", function(event) {
+				if (event.key == 'Enter') {
+					fncLogin();
 				}
-				
-				if(pw == null || pw.length <1) {
-					alert('패스워드를 입력하지 않으셨습니다.');
-					$("input:password").focus();
-					return;
-				}
-				
-				//$("form").attr("method" , "POST");
-				//$("form").attr("action" , "/login.do");
-				//$("form").attr("target" , "_parent");
-			    //$("form").submit();
-				//==> 위의 4실행문과 같은의미			    
-				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
-				
 			});
 		});
 		

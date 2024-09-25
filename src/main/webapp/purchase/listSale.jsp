@@ -135,22 +135,24 @@ a.disabled {
 				</tr>
 
 			</c:forEach>
-
-
-			<c:if test="${salePaging.total == 0 }">
-				<tr class="ct_list_pop">
-					<table>
-						<tr>
-							<td></td>
-							<td align="center">
-								<h3>배송할(구매완료 상태의) 상품이 없습니다.</h3>
-							</td>
-						</tr>
-					</table>
-				</tr>
-			</c:if>
 			
 		</table>
+		
+		<c:if test="${salePaging.total == 0 }">
+			<tr class="ct_list_pop">
+				<table>
+					<tr>
+						<td></td>
+						<td align="left">
+							<c:if test="${!empty search.searchKeyword }">
+								<h3>"${search.searchKeyword}"로 검색한 결과</h3>
+							</c:if>
+							<h3>배송할(구매완료 상태의) 상품이 없습니다.</h3>
+						</td>
+					</tr>
+				</table>
+			</tr>
+		</c:if>
 		
 		<input type="hidden" name="salePage" value="${salePaging.currentPage}" id="page2">
 		

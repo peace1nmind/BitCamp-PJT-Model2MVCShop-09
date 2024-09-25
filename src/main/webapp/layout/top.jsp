@@ -58,19 +58,15 @@
 	        <tr> 
 	          <td width="115">
 		          <c:if test="${ empty user }">
-		              <!-- ////////////////// jQuery Event 처리로 변경됨 ///////////////////////// 
-						<a href="/user/login" target="rightFrame">login</a>	
-						////////////////////////////////////////////////////////////////////////////////////////////////// -->
-						<div>login</div>
+<!-- 						<a href="/user/login" target="rightFrame">login</a>	 -->
+						login
 		           </c:if>   
 	          </td>
 	          <td width="14">&nbsp;</td>
 	          <td width="56">
-		          <c:if test="${ ! empty user }">
-		          		 <!-- ////////////////// jQuery Event 처리로 변경됨 ///////////////////////// 
-		            	<a href="/logout.do" target="_parent">logout</a>
-						////////////////////////////////////////////////////////////////////////////////////////////////// -->
-		            	<span>logout</span>
+		          <c:if test="${ ! empty user }"> 
+<!-- 		            	<a href="/user/logout" target="_parent">logout</a> -->
+		            	logout
 		           </c:if>
 	          </td>
 	        </tr>

@@ -193,9 +193,25 @@
 					
 				</table>
 				
-			<input type="hidden" name="page" value="${paging.currentPage}" id="page1">
-<%-- 			<jsp:include page="../common/pagingNavigator.jsp"></jsp:include> --%>
-			<%@ include file="../common/pagingNavigator.jsp" %>
+				<c:if test="${paging.total == 0 }">
+					<tr class="ct_list_pop">
+						<table>
+							<tr>
+								<td></td>
+								<td align="left">
+									<c:if test="${!empty search.searchKeyword }">
+										<h3>"${search.searchKeyword}"로 검색한 결과</h3>
+									</c:if>
+									<h3>판매중인 상품이 없습니다.</h3>
+								</td>
+							</tr>
+						</table>
+					</tr>
+				</c:if>
+				
+				<input type="hidden" name="page" value="${paging.currentPage}" id="page1">
+	<%-- 			<jsp:include page="../common/pagingNavigator.jsp"></jsp:include> --%>
+				<%@ include file="../common/pagingNavigator.jsp" %>
 			
 			</div>
 

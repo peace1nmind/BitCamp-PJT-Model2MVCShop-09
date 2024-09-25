@@ -19,7 +19,6 @@
 			$(function() {
 				var price = parseInt($("#productPrice").text());
 				
-				alert("½ÇÇà");
 				console.log(price.toLocaleString());
 				
 				$("#productPrice").text(price.toLocaleString());
