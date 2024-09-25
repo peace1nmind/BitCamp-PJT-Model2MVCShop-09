@@ -110,7 +110,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	public List<Purchase> selectSaleList(Search search) {
 		
 		List<Purchase> list = sqlSession.selectList("PurchaseMapper.selectSaleList", 
-													null, 
+													search, 
 													getRowBounds(search));
 		
 //		for (Purchase purchase : list) {
@@ -124,9 +124,9 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public int countSaleList() {
+	public int countSaleList(Search search) {
 
-		return sqlSession.selectOne("PurchaseMapper.countSaleList");
+		return sqlSession.selectOne("PurchaseMapper.countSaleList", search);
 	}
 
 	@Override

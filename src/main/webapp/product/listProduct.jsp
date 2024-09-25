@@ -27,6 +27,7 @@
 				document.detailForm.searchPriceBigger.focus();
 				document.detailForm.searchPriceBigger.setSelectionRange(document.detailForm.searchPriceBigger.value.length, document.detailForm.searchPriceBigger.value.length);
 			} else {
+				$("#page1").val(1);
 				document.detailForm.submit();
 			}
 		}
@@ -192,7 +193,7 @@
 					
 				</table>
 				
-			<input type="hidden" name="page" value="${paging.currentPage}">
+			<input type="hidden" name="page" value="${paging.currentPage}" id="page1">
 <%-- 			<jsp:include page="../common/pagingNavigator.jsp"></jsp:include> --%>
 			<%@ include file="../common/pagingNavigator.jsp" %>
 			

@@ -34,7 +34,7 @@ public interface PurchaseDao {
 	public List<Purchase> selectSaleList(Search search);
 	
 	// 판매완료 상품리스트 count
-	public int countSaleList();
+	public int countSaleList(Search search);
 	
 	// 구매정보 수정
 	public void updatePurchase(Purchase purchase);
