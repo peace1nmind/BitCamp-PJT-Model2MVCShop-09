@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Map;
 
 import com.model2.mvc.service.TranCodeMapper;
+import com.model2.mvc.service.domain.Product;
 
 
 public class Purchase {
