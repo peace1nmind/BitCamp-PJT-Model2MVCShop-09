@@ -34,9 +34,16 @@ public class Product {
 	}
 
 	public void setFile(MultipartFile file) {
-		String fileFullName = file.getOriginalFilename();
-		int index = (fileFullName.contains("\\"))? fileFullName.lastIndexOf("\\")+1 : fileFullName.lastIndexOf("/")+1;
-		fileName = fileFullName.substring(index);
+		System.out.println("\n\n"+file.getOriginalFilename());
+		System.out.println("\n");
+		
+		if (file.getSize() != 0) {
+			String fileFullName = file.getOriginalFilename();
+			
+			int index = (fileFullName.contains("\\"))? fileFullName.lastIndexOf("\\")+1 : fileFullName.lastIndexOf("/")+1;
+			fileName = fileFullName.substring(index);
+		}
+		
 		this.file = file;
 	}
 

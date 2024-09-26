@@ -122,6 +122,7 @@ public class ProductController {
 	// 상품정보
 	@RequestMapping("/getProduct")
 	public String getProduct(@RequestParam("prodNo") String prodNo,
+							 @RequestParam(value="menu", required = false, defaultValue = "search") String menu,
 							 HttpServletRequest request,
 							 HttpServletResponse response,
 							 Model model) throws NumberFormatException, Exception {
@@ -130,53 +131,56 @@ public class ProductController {
 		
 		// 상품정보를 가져오는 로직
 		model.addAttribute("product", productService.getProduct(Integer.parseInt(prodNo)));
+		model.addAttribute("menu", menu);
 		
 		
 		// 최근 본 상품 리스트 로직
-		Cookie[] cookies = request.getCookies();
-		Cookie history = new Cookie("history", null);
-		
-		if (cookies != null && cookies.length > 0) {
-			for (Cookie cookie : cookies) {
-				history = (cookie.getName().equals("history")) ? cookie : history;
+		if (menu != null && menu.equals("search")) {
+			Cookie[] cookies = request.getCookies();
+			Cookie history = new Cookie("history", null);
+			
+			if (cookies != null && cookies.length > 0) {
+				for (Cookie cookie : cookies) {
+					history = (cookie.getName().equals("history")) ? cookie : history;
+				}
 			}
-		}
-		
-
-		String historyValue = history.getValue();
-		String value = "";
-		
-		if (historyValue == null) {
-			value = prodNo;
 			
-		} else {
+	
+			String historyValue = history.getValue();
+			String value = "";
 			
-			if (!historyValue.contains(prodNo)) {
-				value = prodNo + "&" + historyValue;
+			if (historyValue == null) {
+				value = prodNo;
 				
 			} else {
-				value = historyValue.replace(prodNo, "");
 				
-				String[] splittedValue = value.split("&");
-				value = "";
-				
-				for (int i = 0; i < splittedValue.length; i++) {
+				if (!historyValue.contains(prodNo)) {
+					value = prodNo + "&" + historyValue;
 					
-					if (!(splittedValue[i]==null || splittedValue[i].equals(""))) {
-						value += splittedValue[i] + ((i < splittedValue.length -1)? "&" : "");
+				} else {
+					value = historyValue.replace(prodNo, "");
+					
+					String[] splittedValue = value.split("&");
+					value = "";
+					
+					for (int i = 0; i < splittedValue.length; i++) {
 						
+						if (!(splittedValue[i]==null || splittedValue[i].equals(""))) {
+							value += splittedValue[i] + ((i < splittedValue.length -1)? "&" : "");
+							
+						}
 					}
+					
+					value = prodNo + "&" + value;
+					
 				}
-				
-				value = prodNo + "&" + value;
-				
+		
 			}
-	
+			
+			history.setValue(value);
+			response.addCookie(history);
 		}
-		
-		history.setValue(value);
-		response.addCookie(history);
-		
+
 		return "forward:/product/getProduct.jsp";
 	}
 	
@@ -189,8 +193,9 @@ public class ProductController {
 		System.out.println("/updateProduct GET");
 		
 		model.addAttribute("product", productService.getProduct(prodNo));
+		model.addAttribute("fnc", "update");
 		
-		return "forward:/product/updateProductView.jsp";
+		return "/product/addProductView.jsp";
 	}
 	
 	@PostMapping("/updateProduct")
@@ -199,16 +204,20 @@ public class ProductController {
 		
 		System.out.println("/updateProduct POST");
 		
-		String uuid = UUID.randomUUID().toString().split("-")[0];
-		String fileExtension = product.getFileName().substring(product.getFileName().lastIndexOf("."));
-		String uploadFileName = uuid + fileExtension;
+		if (product.getFile().getSize() > 0) {
+			String uuid = UUID.randomUUID().toString().split("-")[0];
+			String fileExtension = product.getFileName().substring(product.getFileName().lastIndexOf("."));
+			String uploadFileName = uuid + fileExtension;
+			
+			product.getFile().transferTo(new File(uploadDir + uploadFileName));
+			
+			product.setFileName(uploadFileName);
+			Thread.sleep(3000);
+		}
 		
-		product.getFile().transferTo(new File(uploadDir + uploadFileName));
+		productService.updateProduct(product);
 		
-		product.setFileName(uploadFileName);
-		Thread.sleep(2000);
-		
-		product = productService.updateProduct(product);
+		/* 원래는 다시 실어줘야하지만 기존과 동일하기때문에 다시 안 실어줘도됨 */
 		
 		return "forward:/product/updateProduct.jsp";
 	}
@@ -216,47 +225,52 @@ public class ProductController {
 	
 	// 상품등록
 	@GetMapping("/addProduct")
-	public String addProduct() {
+	public String addProduct(Model model) {
 		
 		System.out.println("/product/addProduct GET");
 		
-		return "redirect:/product/addProductView.jsp";
+		model.addAttribute("fnc", "add");
+		
+		return "/product/addProductView.jsp";
 	}
 	
-	/* Spring MVC를 활용한 파일 업로드 */
 	@PostMapping("/addProduct")
-	public String addProduct(@ModelAttribute("product") Product product) {
+	public String addProduct(@ModelAttribute("product") Product product,
+							Model model) {
 		
 		System.out.println("/product/addProduct POST");
-
-		// 파일이름이 겹칠수도 있고 보안의 문제로 랜덤된 파일 이름을 사용
-		String uuid = UUID.randomUUID().toString().split("-")[0];
-		String fileExtension = product.getFileName().substring(product.getFileName().lastIndexOf("."));
-		String uploadFileName = uuid + fileExtension;
 		
-		System.out.println("업로드할 디렉토리 : "+uploadDir);
-		System.out.println("\n");
-		File uploadFile = new File(uploadDir+uploadFileName);
-		
-		try {
-			product.getFile().transferTo(uploadFile);
-			Thread.sleep(2000);
+		if (product.getFile().getSize() > 0) {
+			// 파일이름이 겹칠수도 있고 보안의 문제로 랜덤된 파일 이름을 사용
+			String uuid = UUID.randomUUID().toString().split("-")[0];
+			String fileExtension = product.getFileName().substring(product.getFileName().lastIndexOf("."));
+			String uploadFileName = uuid + fileExtension;
 			
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
+			System.out.println("업로드할 디렉토리 : "+uploadDir);
+			System.out.println("\n");
+			File uploadFile = new File(uploadDir+uploadFileName);
 			
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				product.getFile().transferTo(uploadFile);
+				Thread.sleep(3000);
+				
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			product.setFileName(uploadFileName);
 		}
 		
-		product.setFileName(uploadFileName);
-		
 		product = productService.addProduct(product);
+		model.addAttribute("product", product);
 		
-		return "forward:/product/addProduct.jsp";
+		return "/product/getProduct.jsp";
 	}
 
 }

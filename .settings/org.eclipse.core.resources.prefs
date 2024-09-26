@@ -1,6 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/css/common.css=EUC-KR
 encoding//src/main/webapp/css/left.css=EUC-KR
+encoding//src/main/webapp/javascript/addProductView.js=EUC-KR
 encoding//src/main/webapp/javascript/calendar.js=EUC-KR
+encoding//src/main/webapp/javascript/common.js=EUC-KR
+encoding//src/main/webapp/javascript/getProduct.js=EUC-KR
 encoding//src/main/webapp/javascript/left.js=EUC-KR
+encoding//src/main/webapp/javascript/top.js=EUC-KR
 encoding/<project>=x-windows-949

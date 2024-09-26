@@ -11,42 +11,9 @@
 		<link href="/css/left.css" rel="stylesheet" type="text/css">
 		
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-	
-		<script type="text/javascript">
-			
-			$(function() {
-				
-				$("#logInOut span").on({
-					'click': function() {
-				
-						var text = $(this).text().replace(/\s/g, "");
-						
-						console.log("로그인/로그아웃= "+text);
-						
-						switch(text) {
-							
-						case "login":
-							$(window.parent.frames["rightFrame"].document.location).attr("href", "/user/login");
-							break;
-						
-						case "logout":
-							$(window.parent.document.location).attr("href","/user/logout");
-							break;
-						}
-					}
-
-				});
-				
-// 				$("td[width='800'] h2").on('click', function() {
-					
-// 					alert("home으로 이동");
-// 					location.href="/";
-					
-// 				});
-				
-			});
 		
-		</script>
+		<script type="text/javascript" src="/javascript/common.js"></script>
+		<script type="text/javascript" src="/javascript/top.js"></script>
 		
 		<style type="text/css">
 			#logInOut span:hover {cursor: pointer;}

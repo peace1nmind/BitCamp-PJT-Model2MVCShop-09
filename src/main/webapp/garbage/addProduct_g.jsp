@@ -17,15 +17,12 @@
 				integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" 
 				crossorigin="anonymous"></script>
 		
-		<script type="text/javascript">
+		<script type="text/javascript" src="/javascript/addProduct.js"></script>
+		<script type="text/javascript" src="/javascript/common.js"></script>
 		
-			$(function() {
-				var price = parseInt($("#productPrice").text());
-				
-				$("#productPrice").text(price.toLocaleString());
-			});
-		
-		</script>
+		<style type="text/css">
+			.ct_btn01:hover {cursor: pointer;}
+		</style>
 	
 	</head>
 	
@@ -114,7 +111,7 @@
 							<td height="26">
 							
 								<%-- fileName Null 일때 확인 --%>
-								<c:if test="${!empty product.fileName }">
+								<c:if test="${!empty product.fileName}">
 									<img src = "/images/uploadFiles/${product.fileName }" width="300" height="300"/>
 								</c:if>
 								
@@ -138,16 +135,19 @@
 								<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 							</td>
 							<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-								<a href="/product/listProduct?menu=manage">확인</a>
+								확인
 							</td>
 							<td width="14" height="23">
 								<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
 							</td>
+							
+							<td width="30"></td>
+							
 							<td width="17" height="23">
 								<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 							</td>
 							<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-								<a href="/product/addProduct">추가등록</a>
+								추가등록
 							</td>
 							<td width="14" height="23">
 								<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
