@@ -62,7 +62,7 @@ public class ProductController {
 
 	// Method
 	// 상품목록
-	@RequestMapping({"/listProduct", "/listSale"})
+	@RequestMapping("/listProduct")
 	public String listProduct(@RequestParam("menu") String menu,
 							  @ModelAttribute("search") Search search,
 							  @RequestParam(name = "salePage", required = false, defaultValue = "1") int salePage,
@@ -319,108 +319,121 @@ public class ProductController {
 		return "redirect:/product/addProductView.jsp";
 	}
 	
+	/* Spring MVC를 활용한 파일 업로드 */
 	@PostMapping("/addProduct")
-	public String addProduct(HttpServletRequest request) 
-							 throws Exception {
+	public String addProduct(@RequestParam("fileName") MultipartFile file,
+							 @ModelAttribute("product") Product product) {
 		
 		System.out.println("/product/addProduct POST");
 		
-		/* Spring mvc 파일 업로드 참고하기 */
-		/* 파일 업로드 경로 메타데이터로 변경하기 */
-		if (FileUpload.isMultipartContent(request)) {
-			String uploadDir = "F:BitCamp/workspace/07.Model2MVCShop(URI,pattern)/src/main/webapp/images/uploadFiles/";
-			
-			DiskFileUpload fileUpload = new DiskFileUpload();
-			fileUpload.setRepositoryPath(uploadDir);
-			
-			// 최대 업로드 사이즈 설정 (-1= 제한 없음)
-			// 1024 * 1024 * 10
-			fileUpload.setSizeMax(1024 * 1024 * 10);
-			fileUpload.setSizeThreshold(1024 * 100);
-			
-			System.out.println(request.getContentLength());
-			
-			if (request.getContentLength() < fileUpload.getSizeMax()) {
-				
-				Product product = new Product();
-				
-				// 문자열을 특정 구분자 기준으로 토큰(문자열 조각)으로 나누는데 사용하는 클래스(split 과 같음)
-				StringTokenizer token = null;
-				
-				List<FileItem> fileItemList = fileUpload.parseRequest(request);
-				
-				// html에서 받은 값들의 개수
-				int size = fileItemList.size();
-				
-				for (FileItem fileItem : fileItemList) {
-					
-					// 파일 형식/파라미터 인지 확인 (파라미터면 true)
-					if (fileItem.isFormField()) {	// 파라미터라면
-						if (fileItem.getFieldName().equals("manuDate")) {
-							token = new StringTokenizer(fileItem.getString("euc-kr"), "-");
-							String manuDate = token.nextToken() + token.nextToken() + token.nextToken();
-							
-							product.setManuDate(manuDate);
-							
-						} else if (fileItem.getFieldName().equals("prodName")) {
-							product.setProdName(fileItem.getString("euc-kr"));
-							
-						} else if (fileItem.getFieldName().equals("prodDetail")) {
-							product.setProdDetail(fileItem.getString("euc-kr"));
-							
-						} else if (fileItem.getFieldName().equals("price")) {
-							product.setPrice(Integer.parseInt(fileItem.getString("euc-kr")));
-							
-						}
-						
-					} else { // 파일 형식이면
-						if (fileItem.getSize() > 0) { // 파일이 있으면
-							int index = (fileItem.getName().contains("\\"))? 
-											fileItem.getName().lastIndexOf("\\") : 
-											fileItem.getName().lastIndexOf("/");
-							
-							String fileName = fileItem.getName().substring(index+1);
-							
-							product.setFileName(fileName);
-							
-							try {
-								File uploadFile = new File(uploadDir, fileName);
-								fileItem.write(uploadFile);
-								
-								// 파일 업로드 처리 후
-								Thread.sleep(2000); // 2초 정도 대기
-								
-							} catch (Exception e) {
-								e.printStackTrace();
-								
-							}
-							
-						} else { // 파일이 없으면
-							product.setFileName("empty.GIF");
-							
-						}
-					}
-				} // for end	
-
-				product = productService.addProduct(product);
-				
-				request.setAttribute("product", product); 
-					
-			} else {
-				// 업로드하는 파일이 setSizeMax보다 큰 경우
-				int overSize = (request.getContentLength() / 1000000);
-				
-				System.out.println("<script>alert('파일의 크기는 1MB까지 됩니다. 올리신 파일 용량은 " + overSize + "MB 입니다.');");
-				System.out.println("history.back();</script>");
-			}
-			
-		} else {
-			System.out.println("인코딩 타입이 multipart/form-data가 아닙니다");
-		}
+		
 		
 		return "forward:/product/addProduct.jsp";
-		
-	}// method end
+	}
+	
+	
+//	@PostMapping("/addProduct")
+//	public String addProduct(HttpServletRequest request) 
+//							 throws Exception {
+//		
+//		System.out.println("/product/addProduct POST");
+//		
+//		/* Spring mvc 파일 업로드 참고하기 */
+//		/* 파일 업로드 경로 메타데이터로 변경하기 */
+//		if (FileUpload.isMultipartContent(request)) {
+//			String uploadDir = "F:BitCamp/workspace/07.Model2MVCShop(URI,pattern)/src/main/webapp/images/uploadFiles/";
+//			
+//			DiskFileUpload fileUpload = new DiskFileUpload();
+//			fileUpload.setRepositoryPath(uploadDir);
+//			
+//			// 최대 업로드 사이즈 설정 (-1= 제한 없음)
+//			// 1024 * 1024 * 10
+//			fileUpload.setSizeMax(1024 * 1024 * 10);
+//			fileUpload.setSizeThreshold(1024 * 100);
+//			
+//			System.out.println(request.getContentLength());
+//			
+//			if (request.getContentLength() < fileUpload.getSizeMax()) {
+//				
+//				Product product = new Product();
+//				
+//				// 문자열을 특정 구분자 기준으로 토큰(문자열 조각)으로 나누는데 사용하는 클래스(split 과 같음)
+//				StringTokenizer token = null;
+//				
+//				List<FileItem> fileItemList = fileUpload.parseRequest(request);
+//				
+//				// html에서 받은 값들의 개수
+//				int size = fileItemList.size();
+//				
+//				for (FileItem fileItem : fileItemList) {
+//					
+//					// 파일 형식/파라미터 인지 확인 (파라미터면 true)
+//					if (fileItem.isFormField()) {	// 파라미터라면
+//						if (fileItem.getFieldName().equals("manuDate")) {
+//							token = new StringTokenizer(fileItem.getString("euc-kr"), "-");
+//							String manuDate = token.nextToken() + token.nextToken() + token.nextToken();
+//							
+//							product.setManuDate(manuDate);
+//							
+//						} else if (fileItem.getFieldName().equals("prodName")) {
+//							product.setProdName(fileItem.getString("euc-kr"));
+//							
+//						} else if (fileItem.getFieldName().equals("prodDetail")) {
+//							product.setProdDetail(fileItem.getString("euc-kr"));
+//							
+//						} else if (fileItem.getFieldName().equals("price")) {
+//							product.setPrice(Integer.parseInt(fileItem.getString("euc-kr")));
+//							
+//						}
+//						
+//					} else { // 파일 형식이면
+//						if (fileItem.getSize() > 0) { // 파일이 있으면
+//							int index = (fileItem.getName().contains("\\"))? 
+//											fileItem.getName().lastIndexOf("\\") : 
+//											fileItem.getName().lastIndexOf("/");
+//							
+//							String fileName = fileItem.getName().substring(index+1);
+//							
+//							product.setFileName(fileName);
+//							
+//							try {
+//								File uploadFile = new File(uploadDir, fileName);
+//								fileItem.write(uploadFile);
+//								
+//								// 파일 업로드 처리 후
+//								Thread.sleep(2000); // 2초 정도 대기
+//								
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//								
+//							}
+//							
+//						} else { // 파일이 없으면
+//							product.setFileName("empty.GIF");
+//							
+//						}
+//					}
+//				} // for end	
+//
+//				product = productService.addProduct(product);
+//				
+//				request.setAttribute("product", product); 
+//					
+//			} else {
+//				// 업로드하는 파일이 setSizeMax보다 큰 경우
+//				int overSize = (request.getContentLength() / 1000000);
+//				
+//				System.out.println("<script>alert('파일의 크기는 1MB까지 됩니다. 올리신 파일 용량은 " + overSize + "MB 입니다.');");
+//				System.out.println("history.back();</script>");
+//			}
+//			
+//		} else {
+//			System.out.println("인코딩 타입이 multipart/form-data가 아닙니다");
+//		}
+//		
+//		return "forward:/product/addProduct.jsp";
+//		
+//	}// method end
 
 }
 // class end
