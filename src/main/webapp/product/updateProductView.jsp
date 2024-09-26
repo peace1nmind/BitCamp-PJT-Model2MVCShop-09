@@ -13,6 +13,10 @@
 		<script type="text/javascript" src="../javascript/calendar.js">
 		</script>
 		
+		<script src="https://code.jquery.com/jquery-2.2.4.js" 
+				integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" 
+				crossorigin="anonymous"></script>
+		
 		<script type="text/javascript">
 			<!--
 			function fncUpdateProduct(){
@@ -43,6 +47,17 @@
 				document.detailForm.action='/product/updateProduct';
 				document.detailForm.submit();
 			}
+			
+			$(function() {
+				
+				$("#calendar").on('click', function() {
+					show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value);
+				});
+				
+				$("input[name='manuDate']").on('focus', function() {
+					show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value);
+				});
+			});
 			-->
 		</script>
 		
@@ -117,8 +132,7 @@
 					<td class="ct_write01">
 						<input type="text" readonly="readonly" name="manuDate" value="${product.manuDate }" 	
 									class="ct_input_g" style="width: 100px; height: 19px" maxLength="10" minLength="6">&nbsp;
-									<img 	src="../images/ct_icon_date.gif" width="15" height="15" 
-												onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)" />
+									<img src="../images/ct_icon_date.gif" width="15" height="15" id="calendar"/>
 					</td>
 				</tr>
 				<tr>

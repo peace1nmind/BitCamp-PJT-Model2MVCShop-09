@@ -37,6 +37,13 @@
 
 				});
 				
+// 				$("td[width='800'] h2").on('click', function() {
+					
+// 					alert("home으로 이동");
+// 					location.href="/";
+					
+// 				});
+				
 			});
 		
 		</script>

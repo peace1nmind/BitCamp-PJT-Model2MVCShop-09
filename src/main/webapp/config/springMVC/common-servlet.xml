@@ -4,6 +4,8 @@
 		xmlns:context="http://www.springframework.org/schema/context"
 		xmlns:mvc="http://www.springframework.org/schema/mvc"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		
 		xsi:schemaLocation=
 				"http://www.springframework.org/schema/beans 
 				http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -12,7 +14,10 @@
 				http://www.springframework.org/schema/context/spring-context.xsd
 				
 				http://www.springframework.org/schema/mvc
-				http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+				http://www.springframework.org/schema/mvc/spring-mvc.xsd
+				
+				http://www.springframework.org/schema/util 
+				http://www.springframework.org/schema/util/spring-util.xsd">
     
    <!-- :: 공통적인 사항을 설정한 common-servlet.xml 사용. -->
        
@@ -84,9 +89,11 @@
 	</bean>
 	
 	<!-- 파일업로드에 필요한 Bean 추가 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="104850760"/>
-		<property name="defaultEncoding" value="utf-8"/>
-	</bean>
+<!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+<!-- 		<property name="maxUploadSize" value="104850760"/> -->
+<!-- 		<property name="defaultEncoding" value="utf-8"/> -->
+<!-- 	</bean> -->
+	
+	<util:properties id="fileProperties" location="classpath:config/file.properties"/>
 	
 </beans>

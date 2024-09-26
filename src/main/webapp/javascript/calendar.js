@@ -136,9 +136,10 @@
 
 		function str2dt (str_datetime,str_target)
 		{
-			var re_date = /^(\d+)\-(\d+)\-(\d+)$/; 
-	        if (!re_date.exec(str_datetime))
-				return errorTurn("날짜 형식이 잘못 되었습니다. 형식('YYYYMMDD')",str_target); 
+			var re_date = /^(\d+)\-(\d+)\-(\d+)$/;
+			
+	        if (!re_date.test(str_datetime))
+				{return errorTurn("날짜 형식이 잘못 되었습니다. 형식('YYYYMMDD')",str_target); }
 
 			return (new Date (RegExp.$1, RegExp.$2-1, RegExp.$3)); 
 		}
@@ -150,6 +151,9 @@
 		
 		function tuning2dt (str_datetime,str_target)
 		{
+			if (str_datetime.includes('-')) {
+				return str2dt(str_datetime, str_target);
+			}
 			var yr = str_datetime.substr(0,4);
 			var mo = str_datetime.substr(4,2);
 			var dy = str_datetime.substr(6,2);

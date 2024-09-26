@@ -1,8 +1,11 @@
 package com.model2.mvc.service.domain;
 // W D 
 
+import java.io.File;
 import java.sql.Date;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.model2.mvc.service.TranCodeMapper;
 
@@ -14,6 +17,7 @@ public class Product {
 	private String manuDate;
 	private int price;
 	private String fileName;					// 상품 이미지 파일이름
+	private MultipartFile file;
 	private Date regDate;
 	private String proTranCode = "1";			// 상품 상태코드
 	//											  (1:판매중, 2:구매완료, 3:배송중, 4:배송완료)
@@ -25,6 +29,17 @@ public class Product {
 		this.prodNo = prodNo;
 	}
 	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		String fileFullName = file.getOriginalFilename();
+		int index = (fileFullName.contains("\\"))? fileFullName.lastIndexOf("\\")+1 : fileFullName.lastIndexOf("/")+1;
+		fileName = fileFullName.substring(index);
+		this.file = file;
+	}
+
 	public String getProTranCode() {
 		return proTranCode;
 	}
@@ -53,7 +68,7 @@ public class Product {
 	}
 	
 	public void setManuDate(String manuDate) {
-//		manuDate = manuDate.replace("-", "").replace("/", "");
+		manuDate = manuDate.trim().replace("-", "");
 		this.manuDate = manuDate;
 	}
 	

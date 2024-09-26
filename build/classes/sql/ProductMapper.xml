@@ -146,7 +146,7 @@
 				<if test="prodDetail == null">null</if>
 				<if test="prodDetail != null">#{prodDetail}</if>,
 				<if test="manuDate == null">null</if> 
-				<if test="manuDate != null">#{manuDate}</if>,
+				<if test="manuDate != null">#{manuDate:DATE}</if>,
 				#{price:INTEGER},
 				<if test="fileName == null">null</if>
 				<if test="fileName != null">#{fileName}</if>,
