@@ -89,10 +89,10 @@
 	</bean>
 	
 	<!-- 파일업로드에 필요한 Bean 추가 -->
-<!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
-<!-- 		<property name="maxUploadSize" value="104850760"/> -->
-<!-- 		<property name="defaultEncoding" value="utf-8"/> -->
-<!-- 	</bean> -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104850760"/>
+		<property name="defaultEncoding" value="utf-8"/>
+	</bean>
 	
 	<util:properties id="fileProperties" location="classpath:config/file.properties"/>
 	

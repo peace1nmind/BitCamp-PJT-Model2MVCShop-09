@@ -19,6 +19,21 @@
 			}
 		</style>
 		
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded", function() {
+			    var listItems = document.querySelectorAll("ul li");
+			    
+			    listItems.forEach(function(item) {
+			        var text = item.textContent.trim();
+			        
+			        // text에 √가 포함되어 있으면 글자색을 회색으로 변경
+			        if (text.includes("√")) {
+			            item.style.color = "gray";
+			        }
+			    });
+			});
+		</script>
+		
 	</head>
 	
 	<body>
@@ -45,7 +60,7 @@
 		
 		<ul>
 			<li>product, purchase에 대한 intercepter 만들기</li>
-			<li>Spring MVC 파일 업로드</li>
+			<li>√ Spring MVC 파일 업로드</li>
 			<li>08 리펙토링 RestController 완성하기</li>
 			<li>
 				10 리펙토링 Ajax 적용
