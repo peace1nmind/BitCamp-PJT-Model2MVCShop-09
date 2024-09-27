@@ -24,14 +24,14 @@
 	
 	<script type="text/javascript" src="/javascript/calendar.js"></script>
 	<script type="text/javascript" src="/javascript/common.js"></script>
-	<script type="text/javascript" src="/javascript/addProductView.js"></script>
+	<script type="text/javascript" src="/javascript/addAndUpdateProductView.js"></script>
 
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 
 	<form name="detailForm" method="post" enctype="multipart/form-data">
-
+		
 		<input type="hidden" name="prodNo" value="${(empty product.prodNo)? 0 : product.prodNo }" />
 		
 		<input type="hidden" name="fnc" value="${fnc }">

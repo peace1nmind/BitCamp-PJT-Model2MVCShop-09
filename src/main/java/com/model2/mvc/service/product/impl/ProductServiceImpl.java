@@ -50,9 +50,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void updateProduct(Product product) {
+	public Product updateProduct(Product product) {
 		
 		productDao.updateProduct(product);
+		
+		return productDao.selectProduct(product.getProdNo());
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public interface ProductService {
 	public Map<String, Object> getProductList(Search search);
 	
 	// 상품정보 수정
-	public void updateProduct(Product product);
+	public Product updateProduct(Product product);
 	
 	// TranCode 변경 (1: 판매중, 2: 구매완료, 3: 배송중, 4: 배송완료)
 	public void updateTranCode(int prodNo, String proTranCode);

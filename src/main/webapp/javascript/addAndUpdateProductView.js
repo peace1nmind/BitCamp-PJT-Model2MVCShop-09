@@ -51,11 +51,14 @@ $(function() {
 	var fnc = $("input[name='fnc']").val();
 	console.log("fnc : "+fnc);
 	
+	$("input[name='manuDate']").val(toDateType($("input[name='manuDate']").val()));
+	
 	$("#calendar").on('click', function() {
 		show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value);
 	});
 	
 	$("input[name='manuDate']").on('focus', function() {
+		$("input[name='manuDate']").blur();
 		show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value);
 	});
 	

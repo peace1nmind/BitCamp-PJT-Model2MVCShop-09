@@ -126,7 +126,7 @@
 	
 		        var vWinCal = window.open("", "Calendar",
 		                "width=207,height=220,status=no,resizable=no,top=200,left=200");
-		        vWinCal.focus();
+//		        vWinCal.focus();
 		        vWinCal.opener = self;
 		        var calc_doc = vWinCal.document;
 		        calc_doc.write (str_buffer);

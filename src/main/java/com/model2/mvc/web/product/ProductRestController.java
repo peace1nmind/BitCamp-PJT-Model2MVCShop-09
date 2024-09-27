@@ -39,8 +39,8 @@ import com.model2.mvc.service.purchase.PurchaseService;
 // W 24.09.12.start 
 
 @Controller
-@RequestMapping("/product/*")
-public class ProductController {
+@RequestMapping("/json/product/*")
+public class ProductRestController {
 
 	// Field
 	@Autowired
@@ -61,7 +61,7 @@ public class ProductController {
 	String uploadDir;
 
 	// Constructor
-	public ProductController() {
+	public ProductRestController() {
 		System.out.println(":: " +  getClass().getSimpleName() + " default Constructor call\n");
 	}
 
@@ -199,13 +199,10 @@ public class ProductController {
 	}
 	
 	@PostMapping("/updateProduct")
-	public String updateProduct(@ModelAttribute("product") Product product,
-								Model model) 
+	public String updateProduct(@ModelAttribute("product") Product product) 
 								throws Exception {
 		
 		System.out.println("/updateProduct POST");
-		
-		Product beforeProduct = productService.getProduct(product.getProdNo());
 		
 		if (product.getFile().getSize() > 0) {
 			String uuid = UUID.randomUUID().toString().split("-")[0];
@@ -216,16 +213,13 @@ public class ProductController {
 			
 			product.setFileName(uploadFileName);
 			Thread.sleep(3000);
-			
-		} else if (beforeProduct.getFileName() != null && !beforeProduct.getFileName().equals("")) {
-			product.setFileName(beforeProduct.getFileName());
-			
-		} 
+		}
 		
-		product = productService.updateProduct(product);
-		model.addAttribute("product", product);
+		productService.updateProduct(product);
 		
-		return "/product/getProduct.jsp";
+		/* 원래는 다시 실어줘야하지만 기존과 동일하기때문에 다시 안 실어줘도됨 */
+		
+		return "forward:/product/updateProduct.jsp";
 	}
 	
 	
