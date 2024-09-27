@@ -15,6 +15,7 @@
 	
 	<!-- CDN(Content Delivery Network) 호스트 사용 -->
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="/javascript/common.js"></script>
 	<script type="text/javascript" src="/javascript/left.js"></script>
 	
 	<script type="text/javascript">

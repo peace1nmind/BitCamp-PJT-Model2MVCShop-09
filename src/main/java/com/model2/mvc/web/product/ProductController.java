@@ -2,7 +2,9 @@ package com.model2.mvc.web.product;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -133,9 +135,12 @@ public class ProductController {
 		model.addAttribute("product", productService.getProduct(Integer.parseInt(prodNo)));
 		model.addAttribute("menu", menu);
 		
+		System.out.println("\n\n"+menu);
+		System.out.println("\n");
 		
 		// 최근 본 상품 리스트 로직
 		if (menu != null && menu.equals("search")) {
+			
 			Cookie[] cookies = request.getCookies();
 			Cookie history = new Cookie("history", null);
 			
@@ -144,8 +149,7 @@ public class ProductController {
 					history = (cookie.getName().equals("history")) ? cookie : history;
 				}
 			}
-			
-	
+
 			String historyValue = history.getValue();
 			String value = "";
 			
@@ -178,7 +182,10 @@ public class ProductController {
 			}
 			
 			history.setValue(value);
+			System.out.println("\n\tController history= "+history.getValue());
 			response.addCookie(history);
+			System.out.println("addCookie\n");
+			
 		}
 
 		return "forward:/product/getProduct.jsp";
@@ -194,6 +201,7 @@ public class ProductController {
 		
 		model.addAttribute("product", productService.getProduct(prodNo));
 		model.addAttribute("fnc", "update");
+//		model.addAttribute("menu", "manage");
 		
 		return "/product/addAndUpdateProductView.jsp";
 	}
@@ -277,6 +285,39 @@ public class ProductController {
 		model.addAttribute("product", product);
 		
 		return "/product/getProduct.jsp";
+	}
+	
+	
+	// 최근 본 상품
+	@RequestMapping("/history")
+	public String history(HttpServletRequest request) {
+		
+		System.out.println("/history Controller");
+		
+		String historys[] = null;
+		List<Product> productList = new ArrayList<Product>();
+		
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null && cookies.length > 0) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("history")) {
+					historys = (cookie.getValue().trim()).split("&");
+				}
+			}
+		}
+		
+		if (historys != null) {
+			for (String prodNo : historys) {
+			Product product = productService.getProduct(Integer.parseInt(prodNo));
+			productList.add(product);
+			}
+		}
+		
+		System.out.println(productList);
+		request.setAttribute("list", productList);
+		request.setAttribute("tranCodeMap", TranCodeMapper.getInstance().getMap());
+		
+		return "/history.jsp";
 	}
 
 }

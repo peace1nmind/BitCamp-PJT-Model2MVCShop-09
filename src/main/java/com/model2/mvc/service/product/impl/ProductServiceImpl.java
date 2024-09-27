@@ -23,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
 	// Constructor
 	public ProductServiceImpl() {
+		System.out.println(":: " +  getClass().getSimpleName() + " default Constructor call\n");
 	}
 
 	@Override

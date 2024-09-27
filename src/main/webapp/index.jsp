@@ -1,20 +1,9 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
-
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=euc-kr" %>
+<%	System.out.println("/index.jsp"); %>
 <html>
-
 <head>
-	<meta charset="EUC-KR">
-	
-	<title>Model2 MVC Shop</title>
-	
-	<script src="https://code.jquery.com/jquery-2.2.4.js" 
-				integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" 
-				crossorigin="anonymous"></script>
-	
-	<script type="text/javascript" src="/javascript/common.js"></script>
-				
+<title>Model2 MVC Shop</title>
+
 </head>
 
 <frameset rows="80,*" cols="*" frameborder="NO" border="0" framespacing="0">

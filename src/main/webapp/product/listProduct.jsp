@@ -151,6 +151,7 @@
 						<td class="ct_line02"></td>
 						<td class="ct_list_b" width="150">
 							가격&nbsp;
+							<%-- 변경 필요 지점 --%>
 							<input type="button" value="↑↓" 
 									onclick="window.location.href='/product/listProduct?page=1&menu=${menu}&searchCondition=${search.searchCondition}&searchKeyword=${search.searchKeyword}&orderBy=price&desc=${!search.desc}'">
 						</td>
@@ -170,7 +171,8 @@
 							<td></td>
 									
 							<td align="left">
-								<a href="/product/${navi}?prodNo=${product.prodNo}">
+								<%-- 변경 필요 지점 --%>
+								<a href="/product/${navi}?prodNo=${product.prodNo}&menu=search">
 									${product.prodName}
 								</a>
 							</td>

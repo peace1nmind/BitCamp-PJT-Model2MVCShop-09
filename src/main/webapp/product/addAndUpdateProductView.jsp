@@ -164,9 +164,9 @@
 
 				<td bgcolor="D6D6D6" width="1"></td>
 
-				<td class="ct_write01"><input type="file" name="file"
-					class="ct_input_g" style="width: 200px; height: 19px"
-					maxLength="13" value="${product.fileName }" accept="image/*" /></td>
+				<td class="ct_write01">
+				<input type="file" name="file" class="ct_input_g" accept="image/*"
+					   style="width: 200px; height: 19px" maxLength="13" /> *이미지 파일만 올려주세요</td>
 			</tr>
 
 			<tr>
